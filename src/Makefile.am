@@ -59,7 +59,6 @@ pkginclude_HEADERS += kinetics/include/antioch/kinetics_evaluator.h
 # parsing-general
 pkginclude_HEADERS += parsing/include/antioch/tinyxml2.h
 pkginclude_HEADERS += parsing/include/antioch/tinyxml2_imp.h
-pkginclude_HEADERS += parsing/include/antioch/read_reaction_set_data.h
 pkginclude_HEADERS += parsing/include/antioch/species_ascii_parsing.h
 pkginclude_HEADERS += parsing/include/antioch/transport_species_ascii_parsing.h
 pkginclude_HEADERS += parsing/include/antioch/parsing_enum.h
@@ -67,7 +66,7 @@ pkginclude_HEADERS += parsing/include/antioch/xml_parser.h
 pkginclude_HEADERS += parsing/include/antioch/chemkin_definitions.h
 pkginclude_HEADERS += parsing/include/antioch/chemkin_parser.h
 # parsing-kinetics
-pkginclude_HEADERS += parsing/include/antioch/read_reaction_set_data_xml.h
+pkginclude_HEADERS += parsing/include/antioch/read_reaction_set_data.h
 # parsing-viscosity
 pkginclude_HEADERS += parsing/include/antioch/blottner_parsing.h
 pkginclude_HEADERS += parsing/include/antioch/sutherland_parsing.h
