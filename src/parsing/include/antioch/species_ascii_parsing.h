@@ -208,7 +208,7 @@ namespace Antioch
       {
         if(!chem_mixture.chemical_species()[i])
         {
-           std::cerr << chem_mixture.species_inverse_name_map().at(chem_mixture.species_list()[s]) << std::endl;
+           std::cerr << chem_mixture.species_inverse_name_map().at(chem_mixture.species_list()[i]) << std::endl;
         }
       }
       antioch_error();
