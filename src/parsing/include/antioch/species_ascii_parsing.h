@@ -191,7 +191,7 @@ namespace Antioch
 
     // sanity check, we require these informations
     bool fail(false);
-    for(unsigned int s = 0; s < chem_mixture.chemical_species().size(); s++)
+    for(unsigned int s = 0; s < chem_mixture.species_list().size(); s++)
     {
         if(!chem_mixture.chemical_species()[s])
         {
@@ -208,7 +208,7 @@ namespace Antioch
       {
         if(!chem_mixture.chemical_species()[i])
         {
-           std::cerr << chem_mixture.species_inverse_name_map().at(i) << std::endl;
+           std::cerr << chem_mixture.species_inverse_name_map().at(chem_mixture.species_list()[s]) << std::endl;
         }
       }
       antioch_error();
