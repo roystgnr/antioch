@@ -70,7 +70,7 @@ int check_rate_and_derivative(const PairScalars & rate_exact, const PairScalars 
     using std::abs;
 
     typedef typename Antioch::value_type<PairScalars>::type  Scalar;
-    const Scalar tol = std::numeric_limits<Scalar>::epsilon() * 2;
+    const Scalar tol = std::numeric_limits<Scalar>::epsilon() * 20;
 
     int return_flag(0);
    for (unsigned int tuple=0; tuple != ANTIOCH_N_TUPLES; ++tuple)

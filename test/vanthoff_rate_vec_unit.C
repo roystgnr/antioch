@@ -73,52 +73,36 @@ int check_rate_and_derivative(const PairScalars & rate_exact, const PairScalars 
     const Scalar tol = std::numeric_limits<Scalar>::epsilon() * 2;
 
     int return_flag(0);
-   for (unsigned int tuple=0; tuple != ANTIOCH_N_TUPLES; ++tuple)
+   for (unsigned int i=0; i != ANTIOCH_N_TUPLES*2; ++i)
    {
-    if( abs( (rate[2*tuple] - rate_exact[2*tuple])/rate_exact[2*tuple] ) > tol )
+    const Scalar rate_scaling =
+      std::max(std::numeric_limits<Scalar>::epsilon(),
+               std::abs(rate_exact[i]));
+
+    const Scalar derive_scaling =
+      std::max(std::numeric_limits<Scalar>::epsilon(),
+               std::abs(derive_exact[i]));
+
+    if( abs( (rate[i] - rate_exact[i])/rate_scaling ) > tol )
       {
         std::cout << std::scientific << std::setprecision(16)
                   << "Error: Mismatch in rate values." << std::endl
                   << "T = " << T << " K" << std::endl
-                  << "rate(T) = " << rate[2*tuple] << std::endl
-                  << "rate_exact = " << rate_exact[2*tuple] << std::endl
-                  << "relative difference = " <<  abs( (rate[2*tuple] - rate_exact[2*tuple])/rate_exact[2*tuple] ) << std::endl
+                  << "rate(T) = " << rate[i] << std::endl
+                  << "rate_exact = " << rate_exact[i] << std::endl
+                  << "relative difference = " <<  abs( (rate[i] - rate_exact[i])/rate_scaling ) << std::endl
                   << "tolerance = " <<  tol << std::endl;
 
         return_flag = 1;
       }
-    if( abs( (rate[2*tuple+1] - rate_exact[2*tuple+1])/rate_exact[2*tuple+1] ) > tol )
-      {
-        std::cout << std::scientific << std::setprecision(16)
-                  << "Error: Mismatch in rate values." << std::endl
-                  << "T = " << T << " K" << std::endl
-                  << "rate(T) = " << rate[2*tuple] << std::endl
-                  << "rate_exact = " << rate_exact[2*tuple+1] << std::endl
-                  << "relative difference = " <<  abs( (rate[2*tuple] - rate_exact[2*tuple+1])/rate_exact[2*tuple+1] ) << std::endl
-                  << "tolerance = " <<  tol << std::endl;
-
-        return_flag = 1;
-      }
-    if( abs( (derive[2*tuple] - derive_exact[2*tuple])/derive_exact[2*tuple] ) > tol )
+    if( abs( (derive[i] - derive_exact[i])/derive_scaling ) > tol )
       {
         std::cout << std::scientific << std::setprecision(16)
                   << "Error: Mismatch in rate derivative values." << std::endl
                   << "T = " << T << " K" << std::endl
-                  << "drate_dT(T) = " << derive[2*tuple] << std::endl
-                  << "derive_exact = " << derive_exact[2*tuple] << std::endl
-                  << "relative difference = " <<  abs( (derive[2*tuple] - derive_exact[2*tuple])/derive_exact[2*tuple] ) << std::endl
-                  << "tolerance = " <<  tol << std::endl;
-
-        return_flag = 1;
-      }
-    if( abs( (derive[2*tuple+1] - derive_exact[2*tuple+1])/derive_exact[2*tuple+1] ) > tol )
-      {
-        std::cout << std::scientific << std::setprecision(16)
-                  << "Error: Mismatch in rate derivative values." << std::endl
-                  << "T = " << T << " K" << std::endl
-                  << "drate_dT(T) = " << derive[2*tuple+1] << std::endl
-                  << "derive_exact = " << derive_exact[2*tuple+1] << std::endl
-                  << "relative difference = " <<  abs( (derive[2*tuple+1] - derive_exact[2*tuple+1])/derive_exact[2*tuple+1] ) << std::endl
+                  << "drate_dT(T) = " << derive[i] << std::endl
+                  << "derive_exact = " << derive_exact[i] << std::endl
+                  << "relative difference = " <<  abs( (derive[i] - derive_exact[i])/derive_scaling ) << std::endl
                   << "tolerance = " <<  tol << std::endl;
 
         return_flag = 1;

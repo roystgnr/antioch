@@ -38,28 +38,39 @@ int check_rate_and_derivative(const Scalar & rate_exact, const Scalar & derive_e
 {
     using std::abs;
 
-    const Scalar tol = std::numeric_limits<Scalar>::epsilon() * 2;
+    const Scalar tol = std::numeric_limits<Scalar>::epsilon() * 20;
+
+    const Scalar rate_scaling =
+            std::max(std::numeric_limits<Scalar>::epsilon() * 2,
+                     rate_exact);
+
+    const Scalar derive_scaling =
+            std::max(std::numeric_limits<Scalar>::epsilon() * 2,
+                     derive_exact);
+
     int return_flag(0);
-    if( abs( (rate - rate_exact)/rate_exact ) > tol )
+    if( abs( (rate - rate_exact)/rate_scaling ) > tol )
       {
         std::cout << std::scientific << std::setprecision(16)
                   << "Error: Mismatch in rate values." << std::endl
                   << "T = " << T << " K" << std::endl
                   << "rate(T) = " << rate << std::endl
                   << "rate_exact = " << rate_exact << std::endl
-                  << "relative difference = " <<  abs( (rate - rate_exact)/rate_exact ) << std::endl
+                  << "scaled difference = "
+                  <<  abs( (rate - rate_exact)/rate_scaling ) << std::endl
                   << "tolerance = " <<  tol << std::endl;
 
         return_flag = 1;
       }
-    if( abs( (derive - derive_exact)/derive_exact ) > tol )
+    if( abs( (derive - derive_exact)/derive_scaling ) > tol )
       {
         std::cout << std::scientific << std::setprecision(16)
                   << "Error: Mismatch in rate derivative values." << std::endl
                   << "T = " << T << " K" << std::endl
                   << "drate_dT(T) = " << derive << std::endl
                   << "derive_exact = " << derive_exact << std::endl
-                  << "relative difference = " <<  abs( (derive - derive_exact)/derive_exact ) << std::endl
+                  << "scaled difference = "
+                  <<  abs( (derive - derive_exact)/derive_scaling ) << std::endl
                   << "tolerance = " <<  tol << std::endl;
 
         return_flag = 1;

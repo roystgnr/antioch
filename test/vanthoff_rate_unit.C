@@ -54,7 +54,15 @@ int test_values(const Scalar & Cf, const Scalar & eta, const Scalar & Ea, const 
 
     vanthoff_rate.rate_and_derivative(T,rate,deriveRate);
 
-    if( abs( (rate1 - rate_exact)/rate_exact ) > tol )
+    const Scalar rate_scaling =
+      std::max(std::numeric_limits<Scalar>::epsilon(),
+               std::abs(rate_exact));
+
+    const Scalar derive_scaling =
+      std::max(std::numeric_limits<Scalar>::epsilon(),
+               std::abs(derive_exact));
+
+    if( abs( (rate1 - rate_exact)/rate_scaling ) > tol )
       {
           std::cout << std::scientific << std::setprecision(16)
                     << "Error: Mismatch in rate values." << std::endl
@@ -65,7 +73,7 @@ int test_values(const Scalar & Cf, const Scalar & eta, const Scalar & Ea, const 
 
           return_flag = 1;
       }
-    if( abs( (rate - rate_exact)/rate_exact ) > tol )
+    if( abs( (rate - rate_exact)/rate_scaling ) > tol )
       {
           std::cout << std::scientific << std::setprecision(16)
                     << "Error: Mismatch in rate values." << std::endl
@@ -76,7 +84,7 @@ int test_values(const Scalar & Cf, const Scalar & eta, const Scalar & Ea, const 
 
           return_flag = 1;
       }
-    if( abs( (deriveRate1 - derive_exact)/derive_exact ) > tol )
+    if( abs( (deriveRate1 - derive_exact)/derive_scaling ) > tol )
       {
           std::cout << std::scientific << std::setprecision(16)
                     << "Error: Mismatch in rate derivative values." << std::endl
@@ -87,7 +95,7 @@ int test_values(const Scalar & Cf, const Scalar & eta, const Scalar & Ea, const 
 
           return_flag = 1;
       }
-    if( abs( (deriveRate - derive_exact)/derive_exact ) > tol )
+    if( abs( (deriveRate - derive_exact)/derive_scaling ) > tol )
       {
           std::cout << std::scientific << std::setprecision(16)
                     << "Error: Mismatch in rate derivative values." << std::endl

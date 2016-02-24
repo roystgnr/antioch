@@ -36,7 +36,7 @@ int check_rate_and_derivative(const Scalar & rate_exact, const Scalar & derive_e
 {
     using std::abs;
 
-    const Scalar tol = std::numeric_limits<Scalar>::epsilon() * 2;
+    const Scalar tol = std::numeric_limits<Scalar>::epsilon() * 20;
     int return_flag(0);
     if( abs( (rate - rate_exact)/rate_exact ) > tol )
       {
