@@ -115,7 +115,11 @@ int test_val( const PairScalars val, const PairScalars val_exact,
 }
 
 template <typename PairScalars>
-int tester(const PairScalars& example, const std::string& testname)
+int tester(const PairScalars& example, const std::string&
+#ifdef ANTIOCH_HAVE_GRVY
+           testname
+#endif
+          )
 {
   using std::pow;
   using std::sqrt;
