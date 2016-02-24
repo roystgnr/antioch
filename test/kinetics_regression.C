@@ -49,6 +49,7 @@
 template <typename Scalar>
 int checker(const Scalar & theory, const Scalar & computed, const std::string& words)
 {
+  using std::abs;
 
   int return_flag(0);
   const Scalar tol = std::numeric_limits<Scalar>::epsilon() * 500;

@@ -86,6 +86,7 @@ Scalar z(const Scalar & T, const Scalar & eps_kb, const Scalar & z_298)
 template <typename PairScalars>
 int vectester(const PairScalars& example, const std::string& testname)
 {
+  using std::abs;
 
 std::cout << "entering " << testname << std::endl;
   typedef typename Antioch::value_type<PairScalars>::type Scalar;

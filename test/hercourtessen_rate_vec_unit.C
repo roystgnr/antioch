@@ -67,6 +67,8 @@ template <typename PairScalars>
 int check_rate_and_derivative(const PairScalars & rate_exact, const PairScalars & derive_exact,
                               const PairScalars & rate,       const PairScalars & derive, const PairScalars & T)
 {
+    using std::abs;
+
     typedef typename Antioch::value_type<PairScalars>::type  Scalar;
     const Scalar tol = std::numeric_limits<Scalar>::epsilon() * 2;
 
